@@ -42,5 +42,3 @@ app.use((req, res, next) => {
     descripcion: "Esto es un 404 con EJS",
   });
 });
-// git remote set-url node https://github.com/KevinLyxz/Javascript.git
-// git remote add javascript https://github.com/KevinLyxz/Javascript.gitasdasdas asdsadas
