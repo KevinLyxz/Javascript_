@@ -1,0 +1,44 @@
+[
+  {
+    "precio": 70,
+    "moneda": "S/. ",
+    "id": 1,
+    "title": "Croquetas Puppy",
+    "thumbnailUrl": "./img/croquetas_puppy.jpg"
+  },
+  {
+    "precio": 90,
+    "moneda": "S/. ",
+    "id": 2,
+    "title": "Croquetas Premium",
+    "thumbnailUrl": "./img/croquetas_premium.jpg"
+  },
+  {
+    "precio": 20,
+    "moneda": "S/. ",
+    "id": 3,
+    "title": "Snacks (Premios)",
+    "thumbnailUrl": "./img/snacks_premio.jpg"
+  },
+  {
+    "precio": 40,
+    "moneda": "S/. ",
+    "id": 4,
+    "title": "Correa",
+    "thumbnailUrl": "./img/correa.jpg"
+  },
+  {
+    "precio": 25,
+    "moneda": "S/. ",
+    "id": 5,
+    "title": "Pelota",
+    "thumbnailUrl": "./img/pelota_perros.jpg"
+  },
+  {
+    "precio": 35,
+    "moneda": "S/. ",
+    "id": 6,
+    "title": "Juguete de hueso",
+    "thumbnailUrl": "./img/jugueto_hueso.jpg"
+  }
+]

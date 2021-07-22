@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asincrona</title>
+  </head>
+  <body>
+    <h1>Asíncronía en Javascript</h1>
+    <script>
+      /*
+                          LISTA DE ASINCRONIA
+                          1.- SetTimeout y SetInterval - ClearInterval/TImeout
+                          2.. Asincronia y el Evento Loop
+            */
+      /*
+            console.log("Inicio");
+            setTimeout(() => {
+              console.log("Ejecutando un setTimeout, esto se ejecuta una vez");
+            }, 3000); */
+
+      // setInterval(() => {
+      //   console.log(
+      //     `Ejecutando un setInterval, esto se ejecuta
+      //     indefinidamente cada cierto intervalo de tiempo`
+      //   );
+      // }, 1000);
+      /*
+            let temporizador = setInterval(() => {
+              console.info(new Date().toLocaleTimeString());
+            }, 1000);
+
+            clearTimeout();
+            setTimeout(() => {
+              clearInterval(temporizador);
+            }, 3000); */
+
+      /*
+            Antes de explicasr como funciona el modelo de
+            Javascript es importante entender algunos conceptos
+
+            Procesamiento Single thread y Multi thread.
+            - Los hilos son las unidades básicas de ejecución de cada proceso
+            - que realiza nuestra maquina.
+            - Internamente esos procesos pueden correr varios hilos
+            - Hay lenguajes de programación que solamente trabajan en un hilo
+            - o varios hilos
+            - Javascript trabaja en un solo hilo
+            -------------------------------------------------------------------
+
+            Operaciones de CPU y Operaciones de I/O
+            - CPU : las que consume nuestra CPU
+            - Operaciones de entrada de salida la que espera una respuesta
+              - vamos enviar un formulario, que se procese la información
+              - y recibas un mensaje: se ha procesado
+              - Solicitar datos de una API y te devuelva un JSON
+            -----------------------------------------------
+
+            Operaciones concurrentes y paralelas
+              Conceptos asociados a codigo asincrono o sincrono
+              Concurrencia:
+            - Dos o más tareas progresan simultaneamente
+            - se ejecutan al mismo tiempo y ahí van avanzando
+            - al mismo tiempo y avanzando simultaneamente
+            Conclusión: Varias tareas van progresando al mismo tiempo
+
+            Paralelismo: Dos o más tareas se ejecutan al mismo tiempo
+                        (van igual y se ejecutan igual)
+            ---------------------------------------------------
+
+            Operaciones de bloqueantes y No Bloqueantes.
+            - Se refiere a la fase de espera cada vez que se
+            ejecutando una linea de codigo
+
+            Bloqueante: Es aquella que no va a devolver el control a la aplicación
+            hasta que haya terminado toda su tarea
+
+            No bloqueante: significa que las operaciones se ejecutan
+            y devuelven inmediatamente el control al hilo principal
+            no importando si han terminado o no la tarea en el momento
+            que una tarea no bloqueante se acabe y mandará una notificación.
+      ---------------------------------------------------------------
+
+            Operaciones Síncronas y Asíncronnas
+            Significa: cuando tendrá lugar la respuesta
+
+            Sincrono: siginica que la respuesta sucede en el presente
+            en el tiempo inmedianto, espera el resultado
+
+            Asincrono la respuesta sucede en un futuro y no sabe cuando
+            va a venir la respuesta
+            ---------------------------------------------------------
+
+
+            Evento loop:
+            */
+
+      /*
+            En javascript vamos a tener:
+            Código Síncrono bloqueante
+            Cada operación se hace de una vez bloqueado en flujo del hilo
+            principal, este hilo queda bloqueado mientras espera la respuesta
+            cuando esta se procesa pasa  la siguiente operación hasta terminar
+            las siguientes operaciones.
+
+
+            Javascript usa un modelo asíncrono y no bloqueante
+            con un loop de eventos implementado en un solo
+            hilo (single thread) para operaciones de entrada y salida
+            (input/output)
+            */
+      /* (() => {
+              console.log("Código Síncrono");
+              console.log("Inicio");
+
+              function dos() {
+                console.log("Dos");
+              }
+              function uno() {
+                console.log("uno");
+                dos();
+                console.log("Tres");
+              }
+              uno();
+              console.log("Fin");
+            })();  */
+      console.log("********************");
+
+      /* Código Asíncrono no bloqueante*/
+      /*   (() => {
+              console.log("Código Síncrono");
+              console.log("Inicio");
+
+              function dos() {
+                setTimeout(() => {
+                  console.log("Dos");
+                }, 1000);
+              }
+
+              function uno() {
+                setTimeout(() => {
+                  console.log("uno");
+                }, 0);
+
+                dos();
+                console.log("Tres");
+              }
+
+              uno();
+              console.log("Fin");
+            })(); */
+
+      // CALLBACKS
+      // recurversidad
+      // function cuadradoCallback(value, callback) {
+      //   setTimeout(() => {
+      //     callback(value, value * value);
+      //   }, 0 | (Math.random() * 100));
+      // }
+
+      // cuadradoCallback(1, (value, result) => {
+      //   console.log("Inicia el callback");
+      //   console.log(`Callback ${value}, ${result}`);
+      //   cuadradoCallback(2, (value, result) => {
+      //     console.log("Inicia el callback");
+      //     console.log(`Callback ${value}, ${result}`);
+      //     cuadradoCallback(3, (value, result) => {
+      //       console.log("Inicia el callback");
+      //       console.log(`Callback ${value}, ${result}`);
+      //       cuadradoCallback(4, (value, result) => {
+      //         console.log("Inicia el callback");
+      //         console.log(`Callback ${value}, ${result}`);
+      //         console.log("Fin Callback Hell");
+      //         console.log("http://callbackhell.com/");
+      //       });
+      //     });
+      //   });
+      // });
+
+      // PROMESAS
+      /*
+      function cuadradoCallbackPromise(value) {
+        if (typeof value !== "number") {
+          return Promise.reject(`El valor ${value} no es un número`);
+        }
+
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              value,
+              result: value * value,
+            });
+          }, 0 | (Math.random() * 100));
+        });
+      }
+      cuadradoCallbackPromise(0)
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          return cuadradoCallbackPromise(1);
+        })
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          return cuadradoCallbackPromise(2);
+        })
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          return cuadradoCallbackPromise(3);
+        })
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          return cuadradoCallbackPromise(4);
+        })
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          return cuadradoCallbackPromise(5);
+        })
+        .then((x) => {
+          console.log(x);
+          console.log(`Promise ${x.value}, ${x.result}`);
+          console.log("Fin de la promesa");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+        */
+      //  Async - Await
+      function cuadradoPromiseAsyncAwait(value) {
+        if (typeof value !== "number") {
+          return Promise.reject(`El valor ${value} no es un número`);
+        }
+
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              value,
+              result: value * value,
+            });
+          }, 0 | (Math.random() * 1000));
+        });
+      }
+
+      async function funcionAsincronaDeclarative() {
+        try {
+          console.log("Inicio Async Function");
+
+          // vas a esperar el resultado de la función
+          let obj = await cuadradoPromiseAsyncAwait(0);
+          console.log(`Promise ${obj.value}, ${obj.result}`);
+
+          obj = await cuadradoPromiseAsyncAwait(1);
+          console.log(`Promise ${obj.value}, ${obj.result}`);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      // funcionAsincronaDeclarative();
+
+      const funcionAsincronaExpresada = async () => {
+        try {
+          console.log("Inicio Async Function");
+
+          // vas a esperar el resultado de la función
+          let obj = await cuadradoPromiseAsyncAwait(13);
+          console.log(`Promise ${obj.value}, ${obj.result}`);
+
+          obj = await cuadradoPromiseAsyncAwait(16);
+          console.log(`Promise ${obj.value}, ${obj.result}`);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+      // funcionAsincronaExpresada();
+
+      // SYMBOLS
+      let id = Symbol("id");
+      let id2 = Symbol("id2");
+      // console.log(typeof id, typeof id2);
+      // console.log(id === id2);
+
+      const NOMBRE = Symbol("nombre");
+      const SALUDAR = Symbol("saludar");
+
+      const persona = {
+        [NOMBRE]: "Kev",
+        edad: 35,
+      };
+      console.log("************");
+      // console.log("Objeto persona");
+
+      persona.NOMBRE = "Kevin Lyxz";
+      // console.log(persona);
+      // console.log(" *** Propiedad ***");
+      // console.log(persona.NOMBRE);
+      // console.log(" *** Symbol ***");
+      // console.log(persona[NOMBRE]);
+      // console.log("**********");
+
+      persona[SALUDAR] = () => {
+        console.log("Hola");
+      };
+      // console.log(persona);
+
+      // EJECUTAR
+      // persona[SALUDAR]();
+
+      for (let propiedad in persona) {
+        // console.log("For in");
+        // console.log(persona);
+        // console.log(persona[propiedad]);
+      }
+      // console.log(Object.getOwnPropertySymbols(persona));
+
+      // SETS
+
+      const set = new Set([
+        1,
+        2,
+        3,
+        4,
+        5,
+        true,
+        false,
+        false,
+        {},
+        {},
+        "hola",
+        "hOla",
+      ]);
+      console.log(set);
+      console.log(set.size);
+
+      const set2 = new Set();
+      set2.add(1);
+      set2.add(2);
+      set2.add(3);
+      set2.add(4);
+
+      console.log(set2);
+      console.log("Recorriendo set 1");
+      for (const item of set) {
+        console.log(item);
+      }
+
+      console.log("Recorriendo set2");
+      set2.forEach((item) => console.log(item));
+
+      console.log(
+        "Recorriendo un objeto convirtiendolo en un arreglo iterable"
+      );
+      let setArray = Array.from(set);
+      console.log(setArray[10]);
+      // eliminar sets ,
+      // los valores de set son una coleccion de datos unicos
+
+      set.delete("hOla");
+      console.log(set);
+      console.log(set.has("hola"));
+
+      set.clear();
+      console.log(set2);
+
+      // MAPS
+
+      let mapa = new Map();
+      mapa.set("nombre", "Kev");
+      mapa.set("apellido", "Ramirez");
+      mapa.set("Edad", 35);
+
+      console.log(mapa);
+      console.log(mapa.size);
+      console.log(mapa.has("correo"));
+      console.log(mapa.has("nombre"));
+
+      mapa.delete("apellido");
+      mapa.set(19, "Decienueve");
+      mapa.set(false, "Falso");
+      mapa.set({}, "falso");
+
+      console.log(mapa);
+
+      for (const [key, value] of mapa) {
+        console.log(`
+        Llave: ${key} - Valor: ${value}
+        `);
+      }
+
+      const mapa2 = new Map([
+        ["Nombre", "Lyxz"],
+        ["Edad", 7],
+        ["animal", "perro"],
+        [null, "nulo"],
+      ]);
+
+      const llavesMapa2 = [...mapa2.keys()];
+      const valoresMapa2 = [...mapa2.values()];
+      console.log(`${llavesMapa2.join(", ")}\n${valoresMapa2.join(", ")} `);
+      console.log(llavesMapa2, valoresMapa2);
+
+      // WeakSEts y WeaksMaps
+      // Los WeakSets no se les puede agregar directamente
+      // los valores, deben realizarse a con el método "add"
+      let ws = new WeakSet();
+
+      let valor1 = { Nombre: "Kevin" };
+      let valor2 = { Nombre: "Ramirez" };
+      let valor3 = { Edad: 25 };
+
+      ws.add(valor1);
+      ws.add(valor2);
+      ws.add(valor3);
+      //
+      console.log(ws);
+      console.log(ws.has(valor1));
+
+      // setInterval(() => {
+      //   console.log(ws);
+      // }, 1000);
+
+      // setTimeout(() => {
+      //   valor1 = null;
+      //   valor2 = null;
+      //   valor3 = null;
+      // }, 2000);>>
+
+      // WEAK MAP
+
+      const wm = new WeakMap();
+      let llave = {};
+      let llave2 = {};
+      let llave3 = {};
+
+      wm.set(llave, 1);
+      wm.set(llave2, 2);
+      wm.set(llave3, 3);
+
+      console.log(wm);
+      // wm.delete(llave2);
+      console.log(wm.get(llave));
+      console.log(wm.has(llave));
+
+      // Iterables & Iterators
+      const iterable = [1, 2, 3, 4, 5, 6];
+      const itarable2 = "Hola Mundo";
+      const iterable3 = new Set([1, 2, 3, 4, 5]);
+      const iterable4 = new Map([]);
+
+      // Accedemos al iterador del iterable
+      const iterador = iterable[Symbol.iterator]();
+
+      // console.log(iterable);
+      // console.log(iterador);
+      // console.log(iterador.next());
+      let next = iterador.next();
+      while (!next.done) {
+        console.log(next.value);
+        next = iterador.next();
+      }
+
+      // GENERADORES
+      // function* iterable2() {
+      //   yield "hola";
+      //   console.log("Hola consola");
+      //   yield "Hola 2";
+      //   console.log("Seguimos con más instrucciones de nuestro código");
+      //   yield "Hola 3";
+      //   yield "Hola 4";
+      // }
+
+      // let iterador2 = iterable2();
+      // console.log(iterador2.next());
+      // console.log(iterador2.next());
+      // console.log(iterador2.next());
+      // console.log(iterador2.next());
+      // console.log(iterador2.next());
+      // for (const y of iterador2) {
+      //   console.log(y);
+      // }
+
+      // const arr = [...iterable2()];
+      // console.log(arr);
+
+      function cuadrado(valor) {
+        setTimeout(() => {
+          console.log({ valor, resultado: valor * valor });
+        }, Math.random() * 1000);
+      }
+
+      function* generador() {
+        console.log("Inicio del generador");
+        yield cuadrado(0);
+        yield cuadrado(1);
+        yield cuadrado(2);
+        yield cuadrado(3);
+        yield cuadrado(4);
+        yield cuadrado(5);
+        console.log("Termina el generador");
+      }
+      console.log("------------------------------------------------");
+      // for (let i = 0; i < 6; i++) {
+      //   cuadrado(i);
+      // }
+      /*
+      let gen = generador();
+      for (let y of gen) {
+        console.log(y);
+      } */
+
+      // proxies
+      /*
+      tiene que ver con la programación orientada a OBJETOS
+
+      */
+      const persona2 = {
+        nombre: "",
+        apellido: "",
+        edad: 0,
+      };
+      const manejador = {
+        set(obj, prop, valor) {
+          if (Object.keys(obj).indexOf(prop) === -1) {
+            return console.error(`La propiedad "${prop}" no existe en objeto`);
+          }
+          if (
+            (prop === "nombre" || prop === "apellido") &&
+            !/^[A-Za-zñÑÁáÉéÍíÓóÚúÜü]+$/g.test(valor)
+          ) {
+            return console.error(
+              `La propiedad "${prop}" solo acepta letras y espacios en blanco`
+            );
+          }
+          obj[prop] = valor; //HANDLER
+        },
+      };
+      const kev = new Proxy(persona2, manejador);
+      kev.nombre = "Kevin";
+      kev.apellido = "Ramirez";
+      kev.edad = 25;
+      // kev.twitter = "@kevinlyxz";
+      console.log(kev);
+      /**
+       * ! En conclusión el proxy hace una vinculación entre el objeto original
+       * ? y el objeto copia y a tráves de su manejador podemos hacer las validaciones
+       *
+       */
+
+      //
+      /**
+       * ? TITULO: PROPIEDADES DINAMICAS - COMPUTER DYNAMIC -
+       * ! NOTA: Generar el nombre de las propiedades de manera dinamicas
+       */
+
+      let aleat = Math.round(Math.random() * 100); //! EJEMPLO:
+      let objUsuarios = {
+        propiedad: "Valor",
+        [`id_${aleat}`]: "Valor aleastorio",
+      };
+
+      const usuarios = ["Kev", "Ramirez", "Blanco", 25, "Dev"];
+
+      usuarios.forEach(
+        (usuario, index) => (objUsuarios[`id_${index}`] = usuario)
+      );
+      console.log("-------------------------");
+      console.log(objUsuarios);
+      console.log("-------------------------");
+      /**
+       * ? TITULO: THIS GLOBAL - LOCAL - ARROW FUNCTION
+       * ! NOTA:
+       */
+      this.nombre = "Contexto Global";
+      function imprimir() {
+        console.log(this.nombre);
+      }
+      imprimir();
+      const obj = {
+        nombre: "Contexto Objeto",
+        imprimir: function () {
+          console.log(this.nombre);
+        },
+      };
+      obj.imprimir();
+
+      const obj2 = {
+        nombre: "Contexto Objeto 2",
+        imprimir,
+      };
+
+      obj2.imprimir();
+      const obj3 = {
+        nombre: "Contexto Objeto 3",
+        /**
+         * ! NOTA: LAS ARROW FUNCTION NO GENERAN SCOPE
+         */
+        imprimir: () => {
+          console.log(this.nombre);
+        }, //NOTA: imprimi el Contexto Global
+      };
+
+      obj3.imprimir();
+
+      function Persona(nombre) {
+        this.nombre = nombre;
+        // NOTA: Este clousre (function) crea un nuevo SCOPE
+        //NOTA: Por lo tanto esta funcion anonima no tiene ninguna
+        // NOTA: propiedad anonima e imprime el "COTEXTO GLOBAL"
+        // porque lee y busca en el scope global la propiedad
+        /**
+         * ? En vez de crearle una funcion anonima, creamos un
+         * ? Arrow Function porque no crea un scope
+         * ! En este EJEMPLO: crea su propio scope
+         * ! return function () {
+         * !  console.log(this.nombre);
+         * ! };
+         */ // EJEMPLO:
+        return () => {
+          console.log(this.nombre);
+        }; //NOTA: Aquí si
+
+        /**
+         * ? EJEMPLO: ANTIGUAMENTE ANTES DE LAS ARROW FUNCTION
+         * ? ASignabamos el this a una variable
+         * ? EJEMPLO:
+         * ! const that = THIS
+         * ! return function(){ console.log (that.nombre)}
+         */
+      }
+
+      let kevi = new Persona("Kevin");
+      kevi();
+
+      // TITULO: CALL, APPLY, BIND
+      console.log("------------------------");
+      //NOTA: este es una propiedad en el scope global
+      this.lugar = "Contexto Global (lugar)";
+      function saludar(saludo, quien) {
+        console.log(`${saludo} ${quien} desde ${this.lugar}`);
+      }
+      saludar("Hola", "Kevin");
+
+      const objLugar = {
+        lugar: "Contexto Objeto (lugar)",
+      };
+
+      saludar.call(objLugar, "Hola", "Kevin");
+      saludar.apply(objLugar, ["Hola", "Kevin"]);
+
+      // TITULO: BIND()
+
+      const personaDos = {
+        nombre: "Kevin",
+        saludar: function () {
+          console.log(`Hola ${this.nombre}`);
+        },
+      };
+      personaDos.saludar();
+
+      const otraPersona = {
+        //NOTA: BIND() ENLAZA //NOTA: Enlazar el objeto o constructor
+        saludar: personaDos.saludar.bind(personaDos),
+      }; // NOTA: estamos enlazando la propiedad de otraPersona y personaDos
+      otraPersona.saludar();
+      console.log("------------------------");
+      /**
+       * ? TITULO: JSON
+       * !NOTA: las propiedades y sus valores de los objetos json
+       * !NOTA: son con comillas dobles
+       */
+      const json = {
+        nombre: "Kevin",
+        apellido: "Ramirez",
+        edad: "25",
+        redes: {
+          facebook: "@kevinlyxz",
+          instagram: "@kevinlyxz",
+          twitter: "@kevinlyxz",
+        },
+        pais: "Perú",
+      };
+      console.log(json);
+      //NOTA: Convierte cualquier string en el tipo de dato que pueda
+      // leer el JavaScript
+      console.log(JSON.parse("{}"));
+      //NOTA: convierte cualquier tipo de dato a strings para que pueda
+      // ser leido por JSON
+      console.log(JSON.stringify({}));
+      //EJEMPLO:
+      console.log(JSON.stringify(json));
+      //EJEMPLO:
+      console.log(
+        JSON.parse(
+          `{  "nombre": "Kevin",
+  "apellido": "Ramirez",
+  "edad": "25",
+  "redes": {
+    "facebook": "@kevinlyxz",
+    "instagram": "@kevinlyxz",
+    "twitter": "@kevinlyxz"
+  },
+  "pais": "Perú"}`
+        )
+      );
+    </script>
+  </body>
+</html>

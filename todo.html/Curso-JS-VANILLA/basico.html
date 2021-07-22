@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundamentos de Javascript</title>
+  </head>
+  <body>
+    <h1>Fundamentos Javascript</h1>
+    <script>
+      /*
+              LISTA DE APRENDIZAJE
+                1.- VAR - LET - CONST               || LINEA 18 a 69
+                2.- CADENA DE TEXTO                 || LINEA 70 a 107
+                3.- TEMPLATE STRING                 || LINEA 108 a 143
+                4.- NUMEROS                         || LINEA 145 a 170
+                5.- BOLEANOS                        || LINEA 171 a 227
+                6.- FUNCION DECLARATIVA Y EXPRESADA || LINEA 230 a 288
+                7.- ARREGLOS                        || LINEA 290 a 350
+                8.- OBJETOS                         || LINEA 351 a 416
+                9.- TIPOS DE OPERADORES             || LINEA 419 a 430
+                 A) ARITMETICOS                     || LINEA 437 a 443
+                 B) RELACIONALES                    || LINEA 446 a 467
+                 C) INCREMENTO/DECREMENTO - UNARIO  || LINEA 469 a 506
+                 D) LOGICOS                         || LINEA 509 a 530
+                10.- CONDICIONALES                  || LINEA 531 a 559
+                 A) IF-ELSE IF ANIDADOS:            || LINEA 560 a 581
+                 B) TERNARIO:                       || LINEA 582 a 594
+                 C) SWITCH                          || LINEA 595 a 636
+                11.- LOOPS                          || LINEA 637 a 666
+                 A) WHILE - DO WHILE                || LINEA 670 a 686
+                 B) FOR:                            || LINEA 687 a 699
+                 C) FOR IN - FOR OF                 || LINEA 700 a 729
+                12.- TRY - CATCH - FINALLY          || LINEA 732 a 780
+                13.- BREAK y CONTINUE               || LINEA 781 a 836
+                14.- DESTRUCTURACION                || LINEA 837 a 869
+                15.- OBJETOS LITERALES              || LINEA 870 a 916
+                16.- PARAMETROS REST- SPEAD OPERATOR|| LINEA 918 a 1006
+                17.- ARROW FUNCTION                 || LINEA 1007 a
+       */
+
+      /*
+                                           __      __             _____                 _        ______   _______
+                                           \ \    / /     /\     |  __ \               | |      |  ____| |__   __|
+                                            \ \  / /     /  \    | |__) |    ______    | |      | |__       | |
+                                             \ \/ /     / /\ \   |  _  /    |______|   | |      |  __|      | |
+                                              \  /     / ____ \  | | \ \               | |____  | |____     | |
+                                               \/     /_/    \_\ |_|  \_\              |______| |______|    |_|
+
+
+                                          */
+
+      /*Todas las variables declaradas con VAR se quedarán en el SCOPE
+                                                            del documento */
+      var hola = "Hola mundo";
+      let hello = "Hello Word";
+      console.log(hola);
+      console.log(hello);
+      // EJEMPLO
+      console.log(window.hola);
+      console.log(window.hello); // MUESTRA UNDIFINE
+      // porque hello es una palabra reservada!
+      //Bloque de código
+      // EL LET solamente es para el bloque del código
+      // están separados por un juego de llaves {}
+      // Ambito de bloque
+      //TENEMOS las varibles CONST, son variables que deben estar
+      // declaradas o que no va a cambiar su valor
+      // EJEMPLO :
+      const PI = 3.1416;
+      console.log(PI);
+      // La constante PI no puede cambiar
+      // SOLO VALORES PRIMITIVOS NO SE LE PUEDE CAMBIAR EL VALOR A CONST
+      // PERO A LOS VALORES COMPUESTOS si se le puede agregar, tener más valores
+
+      let objeto = {
+        nombre: "Kevin",
+        edad: "25",
+      };
+      let colores = ["blanco", "negro", "azul"];
+      console.log(objeto);
+      console.log(colores);
+
+      objeto.correo = "kevin_k_k_k@hotmail.com";
+      colores.push("verde");
+
+      console.log(objeto);
+      console.log(colores);
+      // VALORES PRIMIIVOS
+      // string, number, boolean, null, undefined,NaN
+      // VALORES COMPUESTOS
+      // Objet={} , array = [], function (){}, class {}. etc
+      // Los valore compuestos son los que puedan usar CONST
+      /*
+                                             _____              _____    ______   _   _               _____
+                                            / ____|     /\     |  __ \  |  ____| | \ | |     /\      / ____|
+                                           | |         /  \    | |  | | | |__    |  \| |    /  \    | (___
+                                           | |        / /\ \   | |  | | |  __|   | . ` |   / /\ \    \___ \
+                                           | |____   / ____ \  | |__| | | |____  | |\  |  / ____ \   ____) |
+                                            \_____| /_/    \_\ |_____/  |______| |_| \_| /_/    \_\ |_____/
+
+
+                                          */
+
+      //MDN MOZILLA DEV NETWORK ( PARA CONSULTAR TEMAS)
+      // CADENA DE TEXTO -- - -- STRING
+      // TENEMOS PROPIEDADES Y MÉTODOS
+      //Propiedades son caracteristicas que están describiendo o
+      // definiendo algo del objeto
+      //      String.length
+      //Métodos: son acciones que el objeto hace
+      //      String.fromCharCode()
+
+      // Cadenas de textos String
+      let nombre = "Kevin";
+      let apellido = "Ramirez";
+      let saludo = new String("Hola Mundo");
+      let lorem = "lorem";
+      console.log(nombre, apellido, saludo);
+
+      console.log(
+        nombre.length,
+        apellido.length,
+        saludo.length,
+        nombre.toUpperCase(),
+        apellido.toUpperCase(),
+        saludo.toLowerCase(),
+        lorem.split("_")
+      );
+      // PODRIA SER pero existe la concatenación
+      let saludo2 = "Bienvenido " + nombre + " " + apellido;
+
+      //   _______   ______   __  __   _____    _                   _______   ______
+      //  |__   __| |  ____| |  \/  | |  __ \  | |          /\     |__   __| |  ____|
+      //     | |    | |__    | \  / | | |__) | | |         /  \       | |    | |__
+      //     | |    |  __|   | |\/| | |  ___/  | |        / /\ \      | |    |  __|
+      //     | |    | |____  | |  | | | |      | |____   / ____ \     | |    | |____
+      //     |_|    |______| |_|  |_| |_|      |______| /_/    \_\    |_|    |______|
+      //   / ____| |__   __| |  __ \  |_   _| | \ | |  / ____|
+      //  | (___      | |    | |__) |   | |   |  \| | | |  __
+      //   \___ \     | |    |  _  /    | |   | . ` | | | |_ |
+      //   ____) |    | |    | | \ \   _| |_  | |\  | | |__| |
+      //  |_____/     |_|    |_|  \_\ |_____| |_| \_|  \_____|
+
+      let saludo3 = `Bievenido ${nombre} ${apellido}`;
+      // Ese acento invertido se llama Backticks
+      console.log(saludo3);
+
+      // EJEMPLO DE COMILLAS DOBLES O SIMPLES vs. TEMPLATE STRING
+      let lista_comillas =
+        "<ul><li>Primavera</li><li>Verano</li><li>Otoño</li><li>Invierno</li></ul>";
+
+      let lista_template_string = ` <ul>
+                                                            <li>Primavera</li>
+                                                            <li>Verano</li>
+                                                            <li>Otoño</li>
+                                                            <li>Invierno</li>
+                                                          </ul>
+                                                          `;
+      // También tenemos otros método pero que podría usarse pero no deberías
+      let ul3 = "<ul>";
+      ul3 += "<li>Primavera</li>";
+      ul3 += "<li>Verano</li>";
+      ul3 += "<li>Otoño</li>";
+      ul3 += "<li>Invierno</li>";
+      ul3 += "</ul>";
+
+      //   _   _   _    _   __  __   ______   _____     ____     _____
+      //  | \ | | | |  | | |  \/  | |  ____| |  __ \   / __ \   / ____|
+      //  |  \| | | |  | | | \  / | | |__    | |__) | | |  | | | (___
+      //  | . ` | | |  | | | |\/| | |  __|   |  _  /  | |  | |  \___ \
+      //  | |\  | | |__| | | |  | | | |____  | | \ \  | |__| |  ____) |
+      //  |_| \_|  \____/  |_|  |_| |______| |_|  \_\  \____/  |_____/
+
+      let a = 2;
+      let b = new Number(1);
+      let c = 7.19;
+      let d = "5.6";
+
+      console.log(a, b, c, d);
+      console.log(c.toFixed(1)); // Cuantos decimales tendrá el número
+      console.log(c.toFixed(5)); // en este caso estamos agregando 5 decimales
+      console.log(parseInt(c)); // Obtener solamente el número entero
+      console.log(parseFloat(c)); // Obtener solamente el número float
+      console.log(typeof c, typeof d); //
+      console.log(a + b);
+      console.log(c + parseInt(d));
+      console.log(c + parseFloat(d)); // Sumar y obtener un número flotante
+      console.log(c + Number.parseInt(d));
+      console.log(c + Number.parseFloat(d));
+
+      //   ____     ____    _        ______              _   _    ____     _____
+      //  |  _ \   / __ \  | |      |  ____|     /\     | \ | |  / __ \   / ____|
+      //  | |_) | | |  | | | |      | |__       /  \    |  \| | | |  | | | (___
+      //  |  _ <  | |  | | | |      |  __|     / /\ \   | . ` | | |  | |  \___ \
+      //  | |_) | | |__| | | |____  | |____   / ____ \  | |\  | | |__| |  ____) |
+      //  |____/   \____/  |______| |______| /_/    \_\ |_| \_|  \____/  |_____/
+
+      let verdadero = true;
+      let falso = false;
+      let v = Boolean(true); // Con el constructor pero no sería lo ideal
+      let f = Boolean(false);
+
+      console.log(verdadero, falso, v, f);
+      console.log(typeof verdadero, typeof falso);
+      console.log(Boolean(0)); // FALSO
+      console.log(Boolean(-7)); // FALSO
+      console.log(Boolean("")); // FALSO
+      console.log(Boolean(" ")); // VERDADERO
+
+      // TRUTHY
+      // if (true)
+      // if ({})
+      // if ([])
+      // if (42)
+      // if ("foo")
+      // if (new Date())
+      // if (-42)
+      // if (3.14)
+      // if (-3.14)
+      // if (Infinity)
+      // if (-Infinity)
+
+      // FALSY
+
+      // if (false)
+      // if (null)
+      // if (undefined)
+      // if (0)
+      // if (-0)
+      // if (0n)
+      // if (NaN)
+      // if ("")
+
+      // UNDEFINED indica que no se ha inicializado una variable
+      // y que el valor está ausente
+      let indefinido;
+      console.log(indefinido);
+      // NULL es un valor especial que indica la ausencia de un valor
+      // esto es hecho intencionalmente por el programador d
+      let nulo = null;
+      console.log(nulo);
+
+      // NOT A NUMBER - NaN
+      // algunos de los datos no sea un numero
+
+      let noEsUnNumero = "Numero" * 3;
+      console.log(noEsUnNumero);
+      /*
+                                            ______   _    _   _   _    _____   _____    ____    _   _   ______    _____
+                                           |  ____| | |  | | | \ | |  / ____| |_   _|  / __ \  | \ | | |  ____|  / ____|
+                                           | |__    | |  | | |  \| | | |        | |   | |  | | |  \| | | |__    | (___
+                                           |  __|   | |  | | | . ` | | |        | |   | |  | | | . ` | |  __|    \___ \
+                                           | |      | |__| | | |\  | | |____   _| |_  | |__| | | |\  | | |____   ____) |
+                                           |_|       \____/  |_| \_|  \_____| |_____|  \____/  |_| \_| |______| |_____/
+
+                                                      Una función es un bloque de código,
+                                                      autocontenido que se puede definir una vez y
+                                                      ejecutar en cualquier momento.
+                                                      Opcionalmente, una función puede aceptar parametros
+                                                      y devolver un valor.
+
+                                                      Las funciones en Javascript son objetos, un tipo especial de objetos:
+
+                                                      Se dice que las funciones son ciudadanos de primera clase porque
+                                                      pueden pasarse como argumentos y usarse como un valor de retorno.
+                                                      */
+
+      // Funciones declaradas y expresadas
+      // declaradas - Declaración de función
+      function estoEsUnaFuncion() {
+        console.log("uno");
+        console.log("dos");
+        console.log("tres");
+        return "La función ha retornado una cadena de texto";
+      }
+      // INVOCACIÓN DE FUNCIONES
+      // estoEsUnaFuncion();
+
+      function saludar(nombre, años) {
+        console.log(`Hola soy ${nombre} y tengo ${años} años`);
+      }
+      saludar("Kevin", 25);
+
+      // funciones declaradas VS funciones expresadas
+
+      /*  funcion funcionDeclarada(){
+                                                            console.log(` Esto es una función declarada,
+                                                            puede invocarse en cualquier parte
+                                                            de nuestro codigo incluso antes
+                                                            de que la funcion sea declarada`);
+                                                          }
+
+                                                          funcionDeclarada(); */
+
+      // Función anonnima
+      // => Arrow function
+      const funcionExpresada = function () {
+        console.log(`Esta es una funcion expresada es decir
+                                                            una función que se le ha asignado como valor a una
+                                                            variable si invocamos está función antes de su
+                                                            definición JavaScript nos dirá.... `);
+      };
+      // NO PUEDES INVOCAR UNA FUNCION EXPRESADA ANTES DE SU
+      // INICIALIZACIÓN.
+      funcionExpresada();
+
+      /*
+                                               /\     |  __ \  |  __ \  |  ____|  / ____| | |       / __ \   / ____|
+                                              /  \    | |__) | | |__) | | |__    | |  __  | |      | |  | | | (___
+                                             / /\ \   |  _  /  |  _  /  |  __|   | | |_ | | |      | |  | |  \___ \
+                                            / ____ \  | | \ \  | | \ \  | |____  | |__| | | |____  | |__| |  ____) |
+                                           /_/    \_\ |_|  \_\ |_|  \_\ |______|  \_____| |______|  \____/  |_____/
+
+                                                */
+
+      const a1 = [1, 2, 3, true];
+      const b2 = ["A", "B", "C", [4, 5, 6]];
+      console.log(a1[1]);
+      console.log(b2[3][1]);
+      console.log(b2.length); // CON LA PROPIEDAD length
+
+      // Podemos ingresar al arreglo mediante [] y si el arreglo padre
+      // tiene un arreglo hijo podemos ingresar de igual forma
+      // [POSICION-A][POSICION-B]
+
+      // CON EL CONSTRUCTOR
+      const c2 = Array.of("X", "Y", "Z", 9, 8, 7);
+      console.log(c2);
+
+      // Método fill para llenar todos los elementos de un Array
+      const d2 = Array(100).fill(false);
+      console.log(d2);
+      // Con esto creamos un Array con el constructor valga la redundancia
+
+      // -------------------------------------------
+      // Un método antiguo es este que ya no se usa
+      const e2 = new Array();
+      console.log(e2);
+
+      const f2 = new Array(1, 2, 3, true, false);
+      console.log(f2);
+      //----------------------------------------------
+      // Métodos PUSH Y POP
+      const g = ["Rojo", "Verde", "Azul"];
+      console.log(g);
+
+      g.push("Negro"); // Agregar un elemento al Array (G)
+      console.log(g);
+
+      g.pop(); // Elimina el ultimo elemento del Array (G)
+      console.log(g);
+      // --------------------------------------------------
+      // Uno de los tantos métodos que existen con los array
+      //       tenemos los forEach
+      // El valor, el indice (el numero de posición)
+      g.forEach(function (colores, index) {
+        // El parametro 2 "colores" que se coloco dentro de la funcion
+        // es el elemento que está recorriendo el foreach que serian
+        // los colores
+        // EL VALOR DE LA POSICION ES EL INDEX
+        console.log(`<li id="${index}">${colores}</li>`);
+      });
+
+      // En conclusion el forEach podemos recorrer
+      // EL VALOR/ELEMENTO -              PRIMER PARAMETRO
+      // EL INDICE/POSICION -    SEGUNDO PARAMETRO
+
+      //    ____    ____         _   ______   _______    ____     _____
+      //   / __ \  |  _ \       | | |  ____| |__   __|  / __ \   / ____|
+      //  | |  | | | |_) |      | | | |__       | |    | |  | | | (___
+      //  | |  | | |  _ <   _   | | |  __|      | |    | |  | |  \___ \
+      //  | |__| | | |_) | | |__| | | |____     | |    | |__| |  ____) |
+      //   \____/  |____/   \____/  |______|    |_|     \____/  |_____/
+
+      // let a = new String("");
+      // console.log(a);
+
+      const b3 = {};
+      console.log(b3);
+
+      // un objeto es una colección llaves y valores
+      // NOTA: un objeto puede tener diferentes propiedades y valores
+
+      // objeto con constructor
+      // const c3 = new Object{};
+      // console.log(c3);
+
+      // Dentro de un objeto a las variables se le van
+      // llamar atributos/propiedades y a las funciones
+      // se les llama métodos.
+      const kev = {
+        nombre: "Kevin",
+        apellido: "Lyxz",
+        edad: 17,
+        pasatiempos: ["Series", "Estudiar", "Estar con mi puchi"],
+        soltero: false,
+        contacto: {
+          email: "kevin_k_k_k@hotmail.com",
+          twitter: "@kev",
+          movil: "51945614118",
+        }, //,
+        // // PROPIEDAD DEL OBJETO
+        // // una funcion expresada /anonima
+        // saludos: function () {
+        //   // ESTA FUNCION PASA A SER LLAMADA METODO
+        //   console.log("Hola :)");
+        // },
+
+        // decirMinombre: function () {
+        //   console.log(`Hola me llamo ${this.nombre} ${this.apellido}
+        //          y tengo ${this.edad} años y mis pasatiempos son ${this.pasatiempos[1]}
+        //          y ver ${this.pasatiempos[0]} me pueden contactar por ${this.contacto.email} o
+        //          llamarme ${this.contacto.movil}`);
+        // },
+      };
+      console.log(kev);
+      // ingresando a los atributos de las propiedades
+      console.log(kev["nombre"]);
+      console.log(kev["apellido"]);
+      console.log(kev["pasatiempos"][1]);
+      // una forma más actual de hacerlo
+      console.log(kev.pasatiempos[2]);
+      //console.log(kev.decirMinombre());
+
+      // Me dira las posiciones de los atributos
+      // o funciones de que tiene un Objeto
+      console.log(Object.keys(kev));
+      // se formará un array
+      console.log(Object.values(kev));
+      // Revisa si el objeto tiene la propiedad que buscamos
+      console.log(Object.hasOwnProperty("nombre"));
+
+      // https://www.messletters.com/es/big-text/
+      //   _______   _____   _____     ____     _____     _____    ______
+      //  |__   __| |_   _| |  __ \   / __ \   / ____|   |  __ \  |  ____|
+      //     | |      | |   | |__) | | |  | | | (___     | |  | | | |__
+      //     | |      | |   |  ___/  | |  | |  \___ \    | |  | | |  __|
+      //     | |     _| |_  | |      | |__| |  ____) |   | |__| | | |____
+      //     |_|    |_____| |_|       \____/  |_____/    |_____/  |______|
+      //    ____    _____    ______   _____               _____     ____    _____    ______    _____
+      //   / __ \  |  __ \  |  ____| |  __ \      /\     |  __ \   / __ \  |  __ \  |  ____|  / ____|
+      //  | |  | | | |__) | | |__    | |__) |    /  \    | |  | | | |  | | | |__) | | |__    | (___
+      //  | |  | | |  ___/  |  __|   |  _  /    / /\ \   | |  | | | |  | | |  _  /  |  __|    \___ \
+      //  | |__| | | |      | |____  | | \ \   / ____ \  | |__| | | |__| | | | \ \  | |____   ____) |
+      //   \____/  |_|      |______| |_|  \_\ /_/    \_\ |_____/   \____/  |_|  \_\ |______| |_____/
+
+      /*      _      ____    _____   ___     __  __   _____   _____   ___    ____    ___    ____
+                                              / \    |  _ \  |_   _| |_ _|   |  \/  | | ____| |_   _| |_ _|  / ___|  / _ \  / ___|
+                                             / _ \   | |_) |   | |    | |    | |\/| | |  _|     | |    | |  | |     | | | | \___ \
+                                            / ___ \  |  _ <    | |    | |    | |  | | | |___    | |    | |  | |___  | |_| |  ___) |
+                                           /_/   \_\ |_| \_\   |_|   |___|   |_|  |_| |_____|   |_|   |___|  \____|  \___/  |____/
+                                                                                                                                    */
+      // tenemos un tipo de operador llamado
+      // SUMA, RESTA Y MULTIPLICACION
+      let a4 = 5 + (5 - 10) * 3;
+      console.log(a4);
+      // MODULO:
+      let modulo = 5 % 2;
+      console.log(modulo);
+
+      /*
+                                                  ____    _____   _          _       ____   ___    ___    _   _      _      _       _____   ____
+                                           |  _ \  | ____| | |        / \     / ___| |_ _|  / _ \  | \ | |    / \    | |     | ____| / ___|
+                                           | |_) | |  _|   | |       / _ \   | |      | |  | | | | |  \| |   / _ \   | |     |  _|   \___ \
+                                           |  _ <  | |___  | |___   / ___ \  | |___   | |  | |_| | | |\  |  / ___ \  | |___  | |___   ___) |
+                                           |_| \_\ |_____| |_____| /_/   \_\  \____| |___|  \___/  |_| \_| /_/   \_\ |_____| |_____| |____/
+
+
+                                                >, <, >=,  <=, == (igual), != (no igual), === (IDENTICO), !== (NO IDENTICO)
+
+
+                                                */
+      console.log(8 > 9);
+      console.log(8 <= 9);
+      console.log(8 == "8"); // MALA PRACTICAR / BOLEANOS
+      console.log(8 === "8");
+
+      /*  MIN 12:06
+                                                = es asignación
+                                                == comparando solo valores (boleano)
+                                                === comparando tipo de dato y valores
+                                                */
+      /*
+
+                                                  ___   _   _    ____   ____    _____   __  __   _____   _   _   _____    ___
+                                           |_ _| | \ | |  / ___| |  _ \  | ____| |  \/  | | ____| | \ | | |_   _|  / _ \
+                                            | |  |  \| | | |     | |_) | |  _|   | |\/| | |  _|   |  \| |   | |   | | | |
+                                            | |  | |\  | | |___  |  _ <  | |___  | |  | | | |___  | |\  |   | |   | |_| |
+                                           |___| |_| \_|  \____| |_| \_\ |_____| |_|  |_| |_____| |_| \_|   |_|    \___/
+                                              ____    _____    ____   ____    _____   __  __   _____   _   _   _____    ___
+                                           |  _ \  | ____|  / ___| |  _ \  | ____| |  \/  | | ____| | \ | | |_   _|  / _ \
+                                           | | | | |  _|   | |     | |_) | |  _|   | |\/| | |  _|   |  \| |   | |   | | | |
+                                           | |_| | | |___  | |___  |  _ <  | |___  | |  | | | |___  | |\  |   | |   | |_| |
+                                           |____/  |_____|  \____| |_| \_\ |_____| |_|  |_| |_____| |_| \_|   |_|    \___/
+
+
+                                            _   _   _   _      _      ____    ___    ___
+                                           | | | | | \ | |    / \    |  _ \  |_ _|  / _ \
+                                           | | | | |  \| |   / _ \   | |_) |  | |  | | | |
+                                           | |_| | | |\  |  / ___ \  |  _ <   | |  | |_| |
+                                            \___/  |_| \_| /_/   \_\ |_| \_\ |___|  \___/
+
+                                           */
+
+      let i = 1;
+
+      // i = + i + 2
+
+      i += 2;
+      i -= 1;
+      // i /= 2
+      console.log(i);
+
+      // en vez de tener i = i + 1  - i += i
+
+      /*
+                                          i++;   Primero imprime el nombre de la variable, luego lo incrementa
+                                          i--;   recomendación utilizar variables más unarios
+                                                    ++i;   || unarios más la variable (en tiempo de ejecución)
+                                                    --i;   || unarios más la variable (podemos tener diferencias)
+                                          */
+      /*
+
+                                            _                   _
+                                           | |   ___     __ _  (_)   ___    ___    ___
+                                           | |  / _ \   / _` | | |  / __|  / _ \  / __|
+                                           | | | (_) | | (_| | | | | (__  | (_) | \__ \
+                                           |_|  \___/   \__, | |_|  \___|  \___/  |___/
+                                                        |___/
+                                          ! - Not: niega, es decir que lo es verdadero lo vuelve falso
+                                          y viceversa
+
+                                          || Or: Cuando tengo 2 o más condiciones, con que una se cumpla,
+                                          es decir sea verdadero, el OR será verdadero
+
+                                          && And: Cuando tengo 2 o más condiciones todas tienen que cumplirse
+                                          es decir ser verdaderos para que AND se cumpla.
+
+
+                                          */ console.log("operadores logicos");
+      console.log(!true);
+      console.log(!false);
+      console.log(9 === "9" || 9 === 9); // uno se cumple
+      console.log(9 === 9 && 9 === "9"); // uno de los dos no se cumple
+
+      /*
+                                             _____    ____    _   _   _____    _____    _____   _____    ____    _   _              _        ______    _____
+                                            / ____|  / __ \  | \ | | |  __ \  |_   _|  / ____| |_   _|  / __ \  | \ | |     /\     | |      |  ____|  / ____|
+                                           | |      | |  | | |  \| | | |  | |   | |   | |        | |   | |  | | |  \| |    /  \    | |      | |__    | (___
+                                           | |      | |  | | | . ` | | |  | |   | |   | |        | |   | |  | | | . ` |   / /\ \   | |      |  __|    \___ \
+                                           | |____  | |__| | | |\  | | |__| |  _| |_  | |____   _| |_  | |__| | | |\  |  / ____ \  | |____  | |____   ____) |
+                                            \_____|  \____/  |_| \_| |_____/  |_____|  \_____| |_____|  \____/  |_| \_| /_/    \_\ |______| |______| |_____/
+
+                                            ¿Estructura de control? Permite controlar el flujo de tu programación
+
+                                            NOTA: tenemos
+                                            estructuras secuenciales
+                                            estructuras condicionales (dependiendo de la evaluación de la condición)
+                                            estructuras repetitivas (loops)
+
+                                      ___   _____               _____   _       ____    _____
+                                     |_ _| |  ___|             | ____| | |     / ___|  | ____|
+                                      | |  | |_       _____    |  _|   | |     \___ \  |  _|
+                                      | |  |  _|     |_____|   | |___  | |___   ___) | | |___
+                                     |___| |_|                 |_____| |_____| |____/  |_____|
+
+                                          _      _   _   ___   ____       _      ____     ___    ____
+                                        / \    | \ | | |_ _| |  _ \     / \    |  _ \   / _ \  / ___|
+                                       / _ \   |  \| |  | |  | | | |   / _ \   | | | | | | | | \___ \
+                                      / ___ \  | |\  |  | |  | |_| |  / ___ \  | |_| | | |_| |  ___) |
+                                     /_/   \_\ |_| \_| |___| |____/  /_/   \_\ |____/   \___/  |____/
+
+
+                                            */
+      // if else: Es una estructura de programación que me permite tomar una decisión
+      // si está condición se cumple, ejecuta ciertas acciones
+
+      if (kev.edad >= 18) {
+        console.log("eres mayor de edad");
+      } else {
+        console.log("No eres mayor de edad");
+      }
+
+      // EJEMPLO CON IF ELSE y ELSE IF (if anidado) con operador logico
+      let hora = 1;
+      if (hora >= 0 && hora <= 5) {
+        console.log("Dejame dormir");
+      } else if (hora >= 6 && hora <= 11) {
+        console.log(`Buenos días, ${kev.nombre}`);
+      } else if (hora >= 12 && hora <= 18) {
+        console.log(`Buenas tardes, ${kev.nombre}`);
+      } else {
+        console.log(`Buenas noches, ${kev.nombre}`);
+      }
+      /*
+                                      _____   _____   ____    _   _      _      ____    ___    ___
+                                     |_   _| | ____| |  _ \  | \ | |    / \    |  _ \  |_ _|  / _ \
+                                       | |   |  _|   | |_) | |  \| |   / _ \   | |_) |  | |  | | | |
+                                       | |   | |___  |  _ <  | |\  |  / ___ \  |  _ <   | |  | |_| |
+                                       |_|   |_____| |_| \_\ |_| \_| /_/   \_\ |_| \_\ |___|  \___/
+                                    */
+      // OPERADORES TERNARIOS
+      // hora === 5 ? console.log("dejame dormir")
+      // : console.log("ya es hora de despertar");
+
+      // Son similares a las condiciones pero más simples y elegantes
+      // Estás se ven en librerias y frameworks
+      /*
+                                      ____   __        __  _____   ___    ____   _   _                ____      _      ____    _____
+                                     / ___|  \ \      / / |_   _| |_ _|  / ___| | | | |              / ___|    / \    / ___|  | ____|
+                                     \___ \   \ \ /\ / /    | |    | |  | |     | |_| |    _____    | |       / _ \   \___ \  |  _|
+                                      ___) |   \ V  V /     | |    | |  | |___  |  _  |   |_____|   | |___   / ___ \   ___) | | |___
+                                     |____/     \_/\_/      |_|   |___|  \____| |_| |_|              \____| /_/   \_\ |____/  |_____|
+
+                                    */
+      // SWITCH - CASE
+      // cuando nosotros tengamos una situación de diferentes valores
+      // para una misma variables
+
+      let dia1 = 2;
+      switch (dia1) {
+        case 0:
+          console.log("Domingo");
+          break; // La palabra reservada Break, sale del switch
+        // Una vez haya caido en uno de esos CASOS
+        case 1:
+          console.log("Lunes");
+          break;
+        case 2:
+          console.log("Martes");
+          break;
+        case 3:
+          console.log("Miercoles");
+          break;
+        case 4:
+          console.log("Jueves");
+          break;
+        case 5:
+          console.log("Viernes");
+          break;
+        case 6:
+          console.log("Sábado");
+          break;
+
+        default:
+          console.log("El día no existe");
+          break;
+      }
+
+      /*
+                                      _        ___     ___    ____    ____
+                                     | |      / _ \   / _ \  |  _ \  / ___|
+                                     | |     | | | | | | | | | |_) | \___ \
+                                     | |___  | |_| | | |_| | |  __/   ___) |
+                                     |_____|  \___/   \___/  |_|     |____/
+
+                                    Ciclos o bucles o estructuras repetitivas:
+                                    Cuando nosotros necesitemos o dependiendo de ciertas condiciones
+                                    que algunas lineas de codigo se estén ejecutando hasta que se cumpla
+                                    una decision valga la redundancia:
+                                    Entra los operadores de incremento y decremento (operadores unarios)
+
+                                    EJEMPLO: todas las compras que hemos hecho en e-coommerce
+                                    hacemos una petición, nos devuelve un objeto y si un usuario
+                                    ha hecho 10 compras y tiene que salir en sus historicos
+
+                                    FOR, DO WHILE, WHILE:
+                                    ESCMAC
+                                    FOR IN y FOR OF
+
+
+                                    PROGRAMACIÓN IMPERATIVA Y DECLARATIVA
+
+                                    IMPERATIVA: le indicamos a la maquina que hacer:
+                                    NOTA: Le indicamos el control del flujo
+
+                                    DECLARATIVA: Definimos la lógica pero no el control del flujo
+
+                                    DO O DO WHILE: son más estructura imperativa de programación estructurada
+                                    Javascript está siendo más declarativo
+
+                                          */
+
+      let contador = 0; // VARIABLE
+      while (contador < 10) {
+        // CONDICION
+        console.log("while" + contador);
+        contador++; // INCREMENTO
+      }
+
+      do {
+        console.log("do while" + contador);
+        contador++;
+      } while (contador < 10);
+
+      /*
+                                    While: Si la condición se cumple, se ejecuta (está condicionado)
+                                    En do while: Al menos vamos a ejecutar la primera vez, todo el bloque
+                                    que está en DO
+                                    */
+      // Se puede realizar de una manera más ordenada y simple
+      // lo que hace el while
+      for (let i = 5; i < 10; i++) {
+        console.log("for" + i);
+      }
+      // ARREGLO
+      let numeros_1 = [10, 20, 30, 40];
+      // Variable  - Condición - propiedad - incremento/decremento
+      for (let i = 0; i < numeros_1.length; i++) {
+        console.log(numeros_1[i]);
+      }
+
+      /*
+                                                LA DIFERENCIA ENTRE FOR IN Y FOR OF
+                                                QUE FOR IN ES LA VARIANTE DE FOR PORQUE ME VA
+                                                A PERMITIR ITERAR/RECORRER LAS PROPIEDADES DE UN
+                                                OBJETO PRIMITIVO
+
+                                                Y FOR OF ME VA A SERVIR PARA RECORRER CADA UNO DE LOS
+                                                ELEMENTOS DE CUALQUIER OBJETO EN JAVASCRIPT QUE sea
+                                                INTEREABLE.
+                                                QUE YO PUEDA PARTIR EN PEQUEÑOS ELEMENTOS COMO LOS
+                                                ARREGLOS, QUE CADA UNO SUS POSICIONES ES UN ELEMENTO.
+
+                                                O COMO LAS CADENAS DE TEXTO CADA CARACTER SE PUEDE
+                                                RECORRER
+
+
+
+                                          */
+
+      // FOR IN
+      // CICLO FOR IN me va a permitir recorrer o iterar todas las
+      // propiedades de un arreglo
+      for (const propiedad in kev) {
+        //console.log(kev[propiedad]);
+        //ver propiedades de kev - // El valor de la propiedad
+        console.log(`Key: ${propiedad} - Value: ${kev[propiedad]}`);
+      }
+
+      for (const elemento of numeros_1) {
+        console.log(elemento);
+      }
+
+      /*
+                                      _____   ____   __   __               ____      _      _____    ____   _   _
+                                     |_   _| |  _ \  \ \ / /              / ___|    / \    |_   _|  / ___| | | | |
+                                       | |   | |_) |  \ V /     _____    | |       / _ \     | |   | |     | |_| |
+                                       | |   |  _ <    | |     |_____|   | |___   / ___ \    | |   | |___  |  _  |
+                                       |_|   |_| \_\   |_|                \____| /_/   \_\   |_|    \____| |_| |_|
+                                      _____   ___   _   _      _      _       _      __   __
+                                     |  ___| |_ _| | \ | |    / \    | |     | |     \ \ / /
+                                     | |_     | |  |  \| |   / _ \   | |     | |      \ V /
+                                     |  _|    | |  | |\  |  / ___ \  | |___  | |___    | |
+                                     |_|     |___| |_| \_| /_/   \_\ |_____| |_____|   |_|
+
+
+                                     Manejo de tus propios mensajes de error
+                                          */
+      try {
+        console.log("En el try se agrega el código a evaluar");
+        NoExiste;
+      } catch (e) {
+        console.log(
+          "Catch, captura cualquier error surgido o lanzado en el try"
+        );
+      } finally {
+        console.log(`El bloque finally se ejecutará
+                                      siempre al final de un bloque try-catch`);
+      }
+
+      try {
+        let numero = "y";
+      } catch (e) {
+        if (isNaN(numero)) {
+          // palabra reservada throw new Error
+          // Nuestro propio de error
+          throw new Error("El caracter introducido no es un numero");
+        }
+      }
+
+      /*
+                                          También el TRY - CATCH
+                                          Puede servirnos para abrir una base de datos (Try)
+                                          con el catch detectar/capturar el error
+                                          Y en el finally si se abrio
+                                          la conexión o no de la base de datos/archivo
+                                          cerrar (Como buena practica) el cierre de la base de datos o
+                                          archivos.
+                                          */
+
+      // También nos sirve para evaluar cualquier tipo de error
+
+      /*
+                                      ____    ____    _____      _      _  __
+                                     | __ )  |  _ \  | ____|    / \    | |/ /
+                                     |  _ \  | |_) | |  _|     / _ \   | ' /
+                                     | |_) | |  _ <  | |___   / ___ \  | . \
+                                     |____/  |_| \_\ |_____| /_/   \_\ |_|\_\
+
+                                        ____    ___    _   _   _____   ___   _   _   _   _   _____
+                                      / ___|  / _ \  | \ | | |_   _| |_ _| | \ | | | | | | | ____|
+                                     | |     | | | | |  \| |   | |    | |  |  \| | | | | | |  _|
+                                     | |___  | |_| | | |\  |   | |    | |  | |\  | | |_| | | |___
+                                      \____|  \___/  |_| \_|   |_|   |___| |_| \_|  \___/  |_____|
+
+
+                                          */
+
+      const numeros_2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+      // Nos esta recorriendo las posiciones
+      for (let i = 0; i < numeros_2.length; i++) {
+        if (i === 5) {
+          break; // En este caso cuando llega a la posición número 5
+        } // Se sale del ciclo for
+
+        console.log(numeros_2[i]);
+        // Con esto nos está recorriendo el arregla y sus valores
+      }
+
+      for (let i = 0; i < numeros_2.length; i++) {
+        if (i === 5) {
+          continue;
+          /*
+                                              Continue no hace que te salgas del ciclo, lo que hace
+                                              es omitir que imprimas o ejecutes el código que se encuentra
+                                              en el ciclo
+
+                                              En este caso omite/salta la posicion 5 (valor: 6) y imprime
+                                              los siguientes
+                                              NOTA: Se salta de la iteración y continua
+
+                                              */
+        }
+
+        console.log(numeros_2[i]);
+        // Con esto nos está recorriendo el arregla y sus valores
+      }
+
+      // EJERCICIO
+
+      const numero_par = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+      for (let i = 0; i < numero_par.length; i++) {
+        if (i % 2 === 1) {
+          // Buscando los impar
+          continue; // Continuar si es IMPAR
+        } // Las posiciones con sus valores
+        console.log(numero_par[i]);
+      }
+      /*
+                                      ____                 _                           _                                   _
+                                     |  _ \    ___   ___  | |_   _ __   _   _    ___  | |_   _   _   _ __    __ _    ___  (_)   ___    _ __
+                                     | | | |  / _ \ / __| | __| | '__| | | | |  / __| | __| | | | | | '__|  / _` |  / __| | |  / _ \  | '_ \
+                                     | |_| | |  __/ \__ \ | |_  | |    | |_| | | (__  | |_  | |_| | | |    | (_| | | (__  | | | (_) | | | | |
+                                     |____/   \___| |___/  \__| |_|     \__,_|  \___|  \__|  \__,_| |_|     \__,_|  \___| |_|  \___/  |_| |_|
+
+                                    */
+      // EJEMPLO DE DESTRUCTURACION
+      const numeros_3 = [1, 2, 3];
+      /*   SIN DESTRUCTURACION
+
+                              let uno = numeros_3[0];
+
+                                  dos = numeros_3[1];
+
+                                  tres = numeros_3[2];
+
+                              console.log(uno,dos,tres);
+                              */
+      // CON DESTRUCTURACION
+
+      const [ofdgdfne, t, three] = numeros_3;
+      console.log(numeros_3);
+
+      const persona_1 = {
+        nombr: "Kevin",
+        apellid: "Ramirez",
+        edad_1: 25,
+      };
+      // ESTO ES DESTRUCTURACION
+      let { nombr, apellid, edad_1 } = persona_1;
+      console.log(persona_1);
+      /*
+                       ___    ____        _   _____   _____    ___    ____
+                      / _ \  | __ )      | | | ____| |_   _|  / _ \  / ___|
+                     | | | | |  _ \   _  | | |  _|     | |   | | | | \___ \
+                     | |_| | | |_) | | |_| | | |___    | |   | |_| |  ___) |
+                      \___/  |____/   \___/  |_____|   |_|    \___/  |____/
+                      _       ___   _____   _____   ____       _      _       _____   ____
+                     | |     |_ _| |_   _| | ____| |  _ \     / \    | |     | ____| / ___|
+                     | |      | |    | |   |  _|   | |_) |   / _ \   | |     |  _|   \___ \
+                     | |___   | |    | |   | |___  |  _ <   / ___ \  | |___  | |___   ___) |
+                     |_____| |___|   |_|   |_____| |_| \_\ /_/   \_\ |_____| |_____| |____/
+
+
+                    */
+
+      let Mascota = "Dulce",
+        Raza = "Maltes",
+        edad = 3;
+
+      const perro = {
+        nombre: Mascota, // Otra forma de llamar un objeto literal
+        raza: Raza, // propiedad raza llamando al valor de la variable RAZA
+        edad: edad, // llamando edad de la variable edad
+      };
+
+      console.log(perro);
+
+      const dog = {
+        Mascota, // de esta forma llamamos a las variables
+        Raza,
+        edad,
+        ladrar: function () {
+          console.log("uhhGuao");
+        },
+        tamano: {
+          // un objeto hijo siempre va con dos puntos :
+          alto_centimetros: 70,
+          ancho_centimetros: 24,
+        },
+      };
+
+      console.log(dog);
+
+      /*
+                                  LOS OBJETOS LITERALES, ES DECIR OBJETOS QUE
+                                  LITERALMENTE DIFINIMOS EN UNA VARIABLE
+                    */
+      /*
+                ____       _      ____       _      __  __   _____   _____   ____     ___    ____
+               |  _ \     / \    |  _ \     / \    |  \/  | | ____| |_   _| |  _ \   / _ \  / ___|
+               | |_) |   / _ \   | |_) |   / _ \   | |\/| | |  _|     | |   | |_) | | | | | \___ \
+               |  __/   / ___ \  |  _ <   / ___ \  | |  | | | |___    | |   |  _ <  | |_| |  ___) |
+               |_|     /_/   \_\ |_| \_\ /_/   \_\ |_|  |_| |_____|   |_|   |_| \_\  \___/  |____/
+
+                // NOTA: Si tu intención es meterte al mundo de los frameworks
+                o librerias reactivas como REACT REST y OPERATOR se usan en el día día
+                 ____    _____   ____    _____
+               |  _ \  | ____| / ___|  |_   _|
+               | |_) | |  _|   \___ \    | |
+               |  _ <  | |___   ___) |   | |
+               |_| \_\ |_____| |____/    |_|
+              Son unas formas de virtualmente ir agregando parametros infinitos
+              ya sea una funcion o a una variable
+              para definir los parametros rest hay que definirlos ante poniendoles
+              3 puntos suspensivos, antes del nombre donde estan guardados esos valores
+              infinitos
+                  ___    ____    _____   ____       _      _____    ___    ____
+                / _ \  |  _ \  | ____| |  _ \     / \    |_   _|  / _ \  |  _ \
+               | | | | | |_) | |  _|   | |_) |   / _ \     | |   | | | | | |_) |
+               | |_| | |  __/  | |___  |  _ <   / ___ \    | |   | |_| | |  _ <
+                \___/  |_|     |_____| |_| \_\ /_/   \_\   |_|    \___/  |_| \_\
+
+                SPREAD
+
+                Se puede agregar en cualquier sentencia de código
+
+                   */
+      // PARAMETROS REST
+      // SE EJECUTA COMO UN TERCER PARAMETROS
+      function sumar(a, b, ...c) {
+        let resultado = a + b;
+
+        // FUNCION ANONIMA
+        // EStá función se va a ejecutar cada vez que venga de C
+        c.forEach(function (n) {
+          resultado += n;
+          // SUMATORIA DE LOS NUMEROS QUE VAYAN RECIBIENDO
+        });
+        return resultado;
+      }
+      // OPERADOR SPEAD
+      // La diferencia entre REST y SPREAD se puede estar ejecutando
+      // en cualquier sentencia de nuestro código
+
+      const arr1 = [1, 2, 3, 4, 5],
+        arr2 = [6, 7, 8, 9, 0];
+
+      console.log(arr1, arr2);
+      // Los tres puntos suspensivos es el spread OPERATOR
+      // ahora es solo tengo un arreglo de 10 posiciones y no 5
+
+      // Que una expresión se puede expandir en situaciones donde vamos
+      // a recibir multiples valores
+      // EJEMPLO
+      // AQUI estoy recibiendo 10 valores guardados en dos arreglos
+      // y estoy creando uno nuevo (arr3)
+      const arr3 = [...arr1, ...arr2];
+
+      console.log(arr3, arr3);
+      /*
+           _      ____    ____     ___   __        __
+          / \    |  _ \  |  _ \   / _ \  \ \      / /
+         / _ \   | |_) | | |_) | | | | |  \ \ /\ / /
+        / ___ \  |  _ <  |  _ <  | |_| |   \ V  V /
+       /_/   \_\ |_| \_\ |_| \_\  \___/     \_/\_/
+
+      */
+      // // Esto es un arrow function, no es obligatoria utilizar
+      // // las llaves
+
+      /*           const saludar = () console.log('Hola');
+                          saludar();
+                            // Con parentesis
+            const saludar = (nombre) => console.log(`${nombre}`);
+            saludar("Kevin");
+                            // Sin parentesis
+            const saludar = nombre => console.log(`${nombre}`);
+             saludar("Kevin");
+
+            Se podría considerar un return implicito */
+
+      /*
+                            ARROW FUNCTION puede usarsi sin llaves
+                            con un parametro se puede obviar los PARENTESIS
+
+                            Si no tenemos un parametro o más de dos parametros
+                            Se tiene que utilizar parentesis
+
+                          */
+
+      // DOS PARAMETROS ARROW FUNCTION
+      // EJEMPLO DE UNA FUNCTION NORMAL
+
+      function sumar_1(a, b) {
+        return a + b;
+      }
+
+      // ARROWN FUNCTION
+      // no es necesario utilizar un return
+      // ya que
+      const sumar_2 = (a, b) => a + b;
+      // RETURN IMPLICITO
+      console.log(sumar_2(4, 5));
+
+      // SIN PARAMETROS
+      const funciondenumeros = () => {
+        console.log("uno");
+      };
+
+      const numeros_4 = [1, 2, 3, 4, 5];
+
+      // SIN ARROW FUNCTIN
+      numeros_4.forEach(function (el, index) {
+        console.log(`_`);
+      });
+
+      // Opcion con arrow function
+      numeros_4.forEach((el, index) =>
+        console.log(`${el} está en la posición ${index}`)
+      );
+
+      // DENTRO DE UN OBJETO LITERAL NO ES UNA BUENA PRACTICA
+      // CREAR UN ARROWN FUNCTION COMO UN METODO DE UN OBJETO
+      // METODO (FUNCION)
+      /*
+                        const perroGrande = {
+                          nombre: "Perry",
+                          ladrar: function () {console.log(this);}
+                        }
+            // UN ARROWN FUNCTION PODRÍA SERVIR PARA HEREDAR O RECONOCER
+            // EL CONTEXTO DONDE SE ENCUENTRA SU OBJETO PADRE DONDE HA SIDO
+            // DECLARADO.
+
+            */
+
+      /*
+        ____     ___     ___
+       |  _ \   / _ \   / _ \
+       | |_) | | | | | | | | |
+       |  __/  | |_| | | |_| |
+       |_|      \___/   \___/
+
+      Clases - Modelo a seguir
+      Objetos - Es una instancia de una clase
+          Atributos: una caracteristica o propiedad del objetos(
+            son variables dentro de un objeto
+          )
+          Métodos: son las acciones que un objeto puede realizar
+          gramaticalmente son verbos
+          Ejemplo: GetElementById
+          (Son funciones pero dentro  de un objeto)
+
+          Javascript POO son mas prototipo que Clases
+          Prototipo: Es un mecanismo por el cual un objeto padre puede heredar
+          atributos o métodos.
+
+          Cadena de prototipos
+
+      */
+
+      // FUNCION CONSTRUCTORA
+      // donde asignamos los métodos
+      // al prototipo, no a la función como tal
+
+      // Los funciones asignadas como métodos
+      // dentro de una funcion contructura consumen muchos recursos
+      //Atributos
+
+      function Animal(nombre, genero) {
+        this.nombre = nombre;
+        this.genero = genero;
+        /*
+                       Métodos QUE NO SE DEBEN HACER:
+
+                         this.sonar = function(){
+                       console.log("Hola, yo hago sonidos por que estoy vivo");
+                            }
+                        this.saludos = function(){
+                       console.log(`Hola, me llama ${this.nombre} y ${this.genero}`);
+                             } */
+      }
+
+      // Métodos agregados al prototipo de la función constructura
+      // Mejora de rendimiento en nuestra programación
+      Animal.prototype.sonar = function () {
+        console.log("Hola, yo hago sonidos porque estoy vivo");
+      };
+      Animal.prototype.saludos = function () {
+        console.log(`Hola, me llama ${this.nombre} y ${this.genero}`);
+      };
+
+      // Herencia prototipica
+      function Perro(nombre, genero, tamano) {
+        this.super = Animal;
+        this.super(nombre, genero); // Obtener los prototipos del objeto Padre
+        // Si super es igual a la funcion constructura padre, y recibe
+        // los parametros
+        this.tamano = tamano;
+      }
+      // Perro está herando de Animal
+      Perro.prototype = new Animal();
+      Perro.prototype.constructor = Perro;
+      // Con el constructor se estaría jalando
+      // todas las caracteristicas
+      // Sobrescritura de métodos del Prototipo padre en el hijo
+      Perro.prototype.sonar = function () {
+        console.log("Estoy vivo gracias a una herencia prototipica");
+      };
+      Perro.prototype.ladrar = function () {
+        console.log("¡Gua Gua!");
+      };
+
+      // INSTANCIA ------------------
+
+      class Gato {
+        // El constructor es un metodo especial que se
+        // ejecuta en el momento de instanciar la clase
+        constructor(nombre, genero) {
+          this.nombre = nombre;
+          this.genero = genero;
+        }
+        sonar() {
+          console.log(`Hola me llamo ${this.nombre}`);
+        }
+        ladrar() {
+          console.log("Miau Miau");
+        }
+      }
+
+      class Raza_Gato extends Gato {
+        constructor(nombre, genero, raza) {
+          // Con el método super() se manda a llamar el
+          //constructor de la clase padre
+          super(nombre, genero, raza);
+          this.raza = null;
+        }
+
+        // Un método estático se pueden ejecutar sin
+        // necesidad de instanciar la clase
+
+        static queEres() {
+          console.log("Los gatos pertenecemos a la familia felina");
+        }
+        // METODOS ESPECIALES
+
+        // Los Setters y Getters son métodos especiales que
+        // nos permiten establecer y obtener los valores de
+        // atributos de nuestra clase
+
+        get GetRaza() {
+          return this.raza;
+        }
+        set SetRaza(raza) {
+          this.raza = raza;
+        }
+      }
+
+      Raza_Gato.queEres();
+      // NEW es un consctructor
+      const snoopy = new Perro("Snoopy", "Macho", "Mediano"),
+        snoopa = new Animal("Snoopa", "Hembra"),
+        chichi = new Gato("Chichi", "Macho"),
+        chicha = new Raza_Gato("Chicha", "Hembra", "Garlfield");
+
+      console.log(snoopy);
+      console.log(snoopa);
+      console.log(chichi);
+
+      chicha.SetRaza = "Maltes";
+      console.log(chicha);
+    </script>
+  </body>
+</html>

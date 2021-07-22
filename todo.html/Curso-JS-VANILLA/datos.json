@@ -1,0 +1,11 @@
+{
+  "nombre": "Kevin",
+  "apellido": "Ramirez",
+  "edad": "25",
+  "redes": {
+    "facebook": "@kevinlyxz",
+    "instagram": "@kevinlyxz",
+    "twitter": "@kevinlyxz"
+  },
+  "pais": "Perú"
+}
