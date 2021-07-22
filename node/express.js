@@ -43,4 +43,4 @@ app.use((req, res, next) => {
   });
 });
 // git remote set-url node https://github.com/KevinLyxz/Javascript.git
-// git remote add javascript https://github.com/KevinLyxz/Javascript.git asdasdasdasdsadasd
+// git remote add javascript https://github.com/KevinLyxz/Javascript.git
