@@ -2,9 +2,10 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
-  "main": "frutas.js",
+  "main": "express.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node express",
+    "dev": "nodemon express"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "cowsay": "^1.5.0",
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.13.3"
   }
 }

@@ -1,32 +1,31 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 // MOTOR DE PLANTILLA
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-
 //FIN DE MOTOR DE PLANTILLA
 
-app.get("/", (req, res) => {
-  res.render("index", { titulo: "mi titulo dinamico" });
-});
+//NOTA: BASE DE DATOS
+const mongoose = require("mongoose");
+const user = "kevinlyxz";
+const password = "5tV8wPtS6QxkV77A";
+const dbname = "veterinaria";
+const uri = `mongodb+srv://${user}:${password}@cluster0.6cqh9.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
-/**
- * ! app.get("/servicios", (req, res) => {
- * ! res.send("Estás en la página de servicios");
- * ! });
- */
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("base de datos conectada"))
+  .catch((e) => console.error("ERROR DE CONEXION", e));
 
-app.get("/servicios", (req, res) => {
-  res.render("servicios", {
-    titulo: "Servicios de EJS",
-    descripcion: "Esta es una página dinamica de EJS para servicios",
-  });
-});
+//
 
-app.listen(port, () => {
-  console.log(`Escuchando desde http://localhost:${port}`);
-});
+//NOTA: RUTAS DE LA WEB
+app.use("/", require("./router/routes"));
+app.use("/mascotas", require("./router/mascotas-routes"));
 
 app.use(express.static(__dirname + "/public"));
 
@@ -41,4 +40,8 @@ app.use((req, res, next) => {
     titulo: "404",
     descripcion: "Esto es un 404 con EJS",
   });
+});
+
+app.listen(port, () => {
+  console.log(`Escuchando desde http://localhost:${port}`);
 });
