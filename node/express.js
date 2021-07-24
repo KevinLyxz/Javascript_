@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 // MOTOR DE PLANTILLA
@@ -8,10 +9,8 @@ app.set("views", __dirname + "/views");
 
 //NOTA: BASE DE DATOS
 const mongoose = require("mongoose");
-const user = "kevinlyxz";
-const password = "5tV8wPtS6QxkV77A";
-const dbname = "veterinaria";
-const uri = `mongodb+srv://${user}:${password}@cluster0.6cqh9.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.6cqh9.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`;
 
 mongoose
   .connect(uri, {
@@ -20,7 +19,6 @@ mongoose
   })
   .then(() => console.log("base de datos conectada"))
   .catch((e) => console.error("ERROR DE CONEXION", e));
-
 //
 
 //NOTA: RUTAS DE LA WEB
