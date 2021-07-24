@@ -12,17 +12,6 @@ router.get("/", async (req, res) => {
       arrayMascotas: arrayMascotas,
       titulo: "Página de Mascotas",
     });
-
-    // res.render("mascotas", {
-    //   arrayMascotas: [
-    //     {
-    //       id: "dino_01",
-    //       nombre: "rex",
-    //       descripcion: "rex description",
-    //     },
-    //   ],
-    //   titulo: "Página de Mascotas",
-    // });
   } catch (e) {
     console.error(e);
   }

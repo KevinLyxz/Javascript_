@@ -1,10 +1,11 @@
 const express = require("express");
-require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 // MOTOR DE PLANTILLA
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
+
+require("dotenv").config();
 //FIN DE MOTOR DE PLANTILLA
 
 //NOTA: BASE DE DATOS
