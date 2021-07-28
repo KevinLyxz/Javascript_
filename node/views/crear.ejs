@@ -1,0 +1,25 @@
+<%- include("templates/cabecera", {tituloinicio: titulo}) %>
+
+<div class="container">
+  <h1><%= titulo %></h1>
+  <h2><%= descripcion %></h2>
+
+  <form action="/mascotas" method="post">
+    <input
+      type="text"
+      placeholder="Agregar nombre"
+      class="form-control my-2"
+      name="nombre"
+    />
+    <input
+      type="text"
+      placeholder="Agregar descripcion"
+      class="form-control my-2"
+      name="descripcion"
+    />
+    <button class="btn btn-success btn-black form-control my-2" type="submit">
+      Agregar
+    </button>
+  </form>
+</div>
+<%- include("templates/footer") %>

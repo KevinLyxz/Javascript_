@@ -1,8 +1,14 @@
 <%- include("templates/cabecera", {tituloinicio: titulo}) %>
-<h1 class="text-primary">Titulo de mi sitio web Mascotas</h1>
-<h2><%= titulo %></h2>
 
 <div class="container">
+  <h1 class="text-primary">Titulo de mi sitio web Mascotas</h1>
+  <h2><%= titulo %></h2>
+
+  <h3 class="my-2">CRUD MONGODB</h3>
+  <a class="btn btn-success btn-block my-4" href="/mascotas/crear"
+    >Crear nueva mascota</a
+  >
+
   <table class="table">
     <thead>
       <tr>
@@ -18,7 +24,11 @@
         <th scope="row"><%= el.id %></th>
         <td><%= el.nombre %></td>
         <td><%= el.descripcion %></td>
-        <td>@mdo</td>
+        <td>
+          <a href="/mascotas/<%= el.id %>" class="btn btn-warning btn-sm"
+            >Ver detalle</a
+          >
+        </td>
       </tr>
       <% }) %> <% } %>
     </tbody>
